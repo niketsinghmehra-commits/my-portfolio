@@ -1,0 +1,518 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Niket Singh Mehra — Content Marketing Writer</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #1a1410;
+    --paper: #f5f0e8;
+    --accent: #c0392b;
+    --muted: #7a6e63;
+    --rule: #d4c9b8;
+    --highlight: #f0e6d0;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: 'DM Sans', sans-serif;
+    font-weight: 300;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── GRAIN OVERLAY ── */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.6;
+  }
+
+  /* ── MASTHEAD ── */
+  header {
+    position: relative;
+    padding: 5rem 8vw 4rem;
+    border-bottom: 1px solid var(--rule);
+    overflow: hidden;
+  }
+
+  header::after {
+    content: 'WRITE';
+    position: absolute;
+    right: -2vw;
+    top: 50%;
+    transform: translateY(-50%);
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(6rem, 18vw, 18rem);
+    font-weight: 900;
+    color: transparent;
+    -webkit-text-stroke: 1px var(--rule);
+    line-height: 1;
+    pointer-events: none;
+    letter-spacing: -0.04em;
+  }
+
+  .eyebrow {
+    font-size: 0.7rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1rem;
+    opacity: 0;
+    animation: fadeUp 0.6s ease forwards 0.1s;
+  }
+
+  h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 7rem);
+    font-weight: 900;
+    line-height: 0.95;
+    letter-spacing: -0.03em;
+    margin-bottom: 1.5rem;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.25s;
+  }
+
+  h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .tagline {
+    max-width: 560px;
+    font-size: 1rem;
+    color: var(--muted);
+    line-height: 1.8;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.4s;
+  }
+
+  .contact-bar {
+    display: flex;
+    gap: 2rem;
+    margin-top: 2.5rem;
+    flex-wrap: wrap;
+    opacity: 0;
+    animation: fadeUp 0.7s ease forwards 0.55s;
+  }
+
+  .contact-bar a {
+    color: var(--ink);
+    text-decoration: none;
+    font-size: 0.85rem;
+    letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--rule);
+    padding-bottom: 2px;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .contact-bar a:hover {
+    color: var(--accent);
+    border-color: var(--accent);
+  }
+
+  /* ── MAIN LAYOUT ── */
+  main {
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 0;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 4vw;
+  }
+
+  /* ── SECTION DEFAULTS ── */
+  section {
+    padding: 4rem 0;
+    border-bottom: 1px solid var(--rule);
+    opacity: 0;
+    transform: translateY(24px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  section:last-child { border-bottom: none; }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .section-label::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: var(--accent);
+  }
+
+  h2 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.8rem, 3vw, 2.6rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.02em;
+    margin-bottom: 1.5rem;
+  }
+
+  /* ── ABOUT ── */
+  .about-text p {
+    font-size: 1.05rem;
+    color: var(--ink);
+    max-width: 620px;
+    line-height: 1.85;
+  }
+
+  .about-text p + p { margin-top: 1.2rem; }
+
+  /* ── SKILLS ── */
+  .skills-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 1px;
+    background: var(--rule);
+    border: 1px solid var(--rule);
+    margin-top: 0.5rem;
+  }
+
+  .skill-item {
+    background: var(--paper);
+    padding: 1.2rem 1.4rem;
+    font-size: 0.85rem;
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    transition: background 0.2s;
+    position: relative;
+  }
+
+  .skill-item:hover {
+    background: var(--highlight);
+  }
+
+  .skill-item::before {
+    content: '→';
+    color: var(--accent);
+    margin-right: 0.5rem;
+    font-size: 0.75rem;
+  }
+
+  /* ── CERTS ── */
+  .cert-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0.6rem 2rem;
+  }
+
+  .cert-list li {
+    font-size: 0.875rem;
+    color: var(--ink);
+    padding: 0.5rem 0;
+    border-bottom: 1px dashed var(--rule);
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 0.5rem;
+  }
+
+  .cert-list li span {
+    font-size: 0.7rem;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  /* ── SIDEBAR ── */
+  aside {
+    border-left: 1px solid var(--rule);
+    padding: 4rem 0 4rem 3rem;
+  }
+
+  .aside-block {
+    margin-bottom: 3rem;
+    opacity: 0;
+    transform: translateX(20px);
+    transition: opacity 0.7s ease, transform 0.7s ease;
+  }
+
+  .aside-block.visible {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .aside-label {
+    font-size: 0.6rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--accent);
+    font-weight: 500;
+    margin-bottom: 1.2rem;
+  }
+
+  .edu-item { margin-bottom: 1.5rem; }
+
+  .edu-degree {
+    font-family: 'Playfair Display', serif;
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 0.15rem;
+  }
+
+  .edu-school {
+    font-size: 0.8rem;
+    color: var(--muted);
+  }
+
+  .edu-year {
+    font-size: 0.72rem;
+    color: var(--accent);
+    letter-spacing: 0.1em;
+    margin-top: 0.2rem;
+  }
+
+  .tag-cloud {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .tag {
+    font-size: 0.72rem;
+    padding: 0.3rem 0.7rem;
+    border: 1px solid var(--rule);
+    color: var(--muted);
+    letter-spacing: 0.05em;
+    transition: all 0.2s;
+  }
+
+  .tag:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+    background: rgba(192, 57, 43, 0.04);
+  }
+
+  /* ── PULL QUOTE ── */
+  .pull-quote {
+    grid-column: 1 / -1;
+    padding: 5rem 8vw;
+    background: var(--ink);
+    color: var(--paper);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .pull-quote::before {
+    content: '"';
+    font-family: 'Playfair Display', serif;
+    font-size: 20rem;
+    position: absolute;
+    top: -4rem;
+    left: 4vw;
+    opacity: 0.04;
+    line-height: 1;
+    pointer-events: none;
+    color: var(--paper);
+  }
+
+  .pull-quote blockquote {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(1.4rem, 3vw, 2.2rem);
+    font-style: italic;
+    font-weight: 400;
+    line-height: 1.5;
+    max-width: 700px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    text-align: center;
+    padding: 3rem 4vw;
+    font-size: 0.75rem;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    border-top: 1px solid var(--rule);
+    text-transform: uppercase;
+  }
+
+  /* ── ANIMATIONS ── */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 800px) {
+    main {
+      grid-template-columns: 1fr;
+    }
+    aside {
+      border-left: none;
+      border-top: 1px solid var(--rule);
+      padding: 3rem 0 0;
+    }
+    .cert-list {
+      grid-template-columns: 1fr;
+    }
+    header {
+      padding: 3rem 6vw 3rem;
+    }
+    header::after { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header>
+  <p class="eyebrow">Portfolio · Content Marketing Writer</p>
+  <h1>Niket<br><em>Singh</em><br>Mehra</h1>
+  <p class="tagline">Result-driven content strategist with 5+ years of experience crafting SEO-friendly, high-performing content across technical and non-technical sectors.</p>
+  <div class="contact-bar">
+    <a href="tel:+917428578071">+91-7428578071</a>
+    <a href="mailto:niketsinghmehra05@gmail.com">niketsinghmehra05@gmail.com</a>
+  </div>
+</header>
+
+<main>
+
+  <!-- ABOUT -->
+  <section class="observe">
+    <p class="section-label">About</p>
+    <h2>Words that work<br>harder than most.</h2>
+    <div class="about-text">
+      <p>Skilled in leveraging analytics, keyword research, and market insights to create content that boosts organic traffic, improves engagement, and supports lead-generation goals.</p>
+      <p>Adept at managing end-to-end content workflows, cross-functional collaboration, and multi-channel content strategy across B2B, B2C, and B2G verticals.</p>
+    </div>
+  </section>
+
+  <!-- SIDEBAR -->
+  <aside>
+    <div class="aside-block observe-side">
+      <p class="aside-label">Education</p>
+      <div class="edu-item">
+        <div class="edu-degree">MBA — Marketing & Strategy</div>
+        <div class="edu-school">Delhi University</div>
+        <div class="edu-year">2022 – 2024</div>
+      </div>
+      <div class="edu-item">
+        <div class="edu-degree">BA (English Hons.)</div>
+        <div class="edu-school">Delhi University</div>
+        <div class="edu-year">2019 – 2022</div>
+      </div>
+    </div>
+
+    <div class="aside-block observe-side">
+      <p class="aside-label">Tools & Platforms</p>
+      <div class="tag-cloud">
+        <span class="tag">Ahrefs</span>
+        <span class="tag">Semrush</span>
+        <span class="tag">Google Analytics</span>
+        <span class="tag">Search Console</span>
+        <span class="tag">WordPress</span>
+        <span class="tag">Canva</span>
+        <span class="tag">Visio</span>
+        <span class="tag">Crayon</span>
+        <span class="tag">MS Office</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- SKILLS (full width feel via spanning) -->
+  <section class="observe" style="grid-column:1">
+    <p class="section-label">Core Skills</p>
+    <div class="skills-grid">
+      <div class="skill-item">SEO Writing & Keyword Research</div>
+      <div class="skill-item">Content Strategy & Calendars</div>
+      <div class="skill-item">Technical & SaaS Content Writing</div>
+      <div class="skill-item">B2B, B2C & B2G Content</div>
+      <div class="skill-item">Social Media & Multimedia Scripts</div>
+      <div class="skill-item">Competitive Analysis & Market Research</div>
+      <div class="skill-item">Google Analytics & Search Console</div>
+      <div class="skill-item">Whitepapers & Thought Leadership</div>
+    </div>
+  </section>
+
+  <!-- PULL QUOTE (full bleed) -->
+  <div class="pull-quote observe" style="grid-column: 1 / -1; margin: 0 -4vw;">
+    <blockquote>Content is the bridge between a brand's voice and the audience it's trying to reach — every word is a deliberate choice.</blockquote>
+  </div>
+
+  <!-- CERTIFICATIONS -->
+  <section class="observe" style="grid-column:1 / -1">
+    <p class="section-label">Certifications</p>
+    <h2>Continuous learning,<br>certified.</h2>
+    <ul class="cert-list">
+      <li>Technical Writing: Quick Start Guide <span>LinkedIn Learning · 2024</span></li>
+      <li>Marketing Research: Competitive Intelligence <span>LinkedIn Learning · 2024</span></li>
+      <li>Keyword Research Course <span>Semrush · 2025</span></li>
+      <li>Effective Presentation & Business Writing <span>LinkedIn Learning · 2025</span></li>
+      <li>UX Writing Fundamentals <span>LinkedIn Learning · 2025</span></li>
+      <li>Writing Articles <span>LinkedIn Learning · 2025</span></li>
+      <li>SEO Content Marketing <span>LinkedIn Learning · 2025</span></li>
+      <li>Advanced Content Marketing <span>LinkedIn Learning · 2025</span></li>
+      <li>Email Marketing <span>LinkedIn Learning · 2025</span></li>
+      <li>Mastering Ideas & Scripts <span>LinkedIn Learning · 2025</span></li>
+    </ul>
+  </section>
+
+</main>
+
+<footer>
+  © 2026 Niket Singh Mehra &nbsp;·&nbsp; Content Marketing Writer &nbsp;·&nbsp; New Delhi, India
+</footer>
+
+<script>
+  // Intersection Observer for scroll reveals
+  const sections = document.querySelectorAll('.observe');
+  const sideBlocks = document.querySelectorAll('.observe-side');
+
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sections.forEach(s => io.observe(s));
+
+  const sio = new IntersectionObserver((entries) => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 120);
+        sio.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  sideBlocks.forEach(s => sio.observe(s));
+</script>
+</body>
+</html>
